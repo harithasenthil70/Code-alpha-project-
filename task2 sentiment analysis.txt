@@ -1,0 +1,50 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Sample Amazon Product Reviews Dataset
+data = {
+    "review": [
+        "The product quality is amazing, I really loved it!",
+        "Worst experience ever. Completely disappointed.",
+        "It's okay, not too good and not too bad.",
+        "Fast delivery and excellent packaging. Very satisfied!",
+        "The item was damaged when it arrived."
+    ]
+}
+
+df = pd.DataFrame(data)
+
+# Define Positive & Negative Words
+positive_words = ["amazing", "good", "love", "excellent", "fast", "satisfied", "great", "happy"]
+negative_words = ["worst", "bad", "disappointed", "damaged", "poor", "late", "terrible"]
+
+# Simple Sentiment Function
+def simple_sentiment(text):
+    text = text.lower()
+    pos = sum(word in text for word in positive_words)
+    neg = sum(word in text for word in negative_words)
+
+    if pos > neg:
+        return "Positive"
+    elif neg > pos:
+        return "Negative"
+    else:
+        return "Neutral"
+
+# Apply Sentiment Analysis
+df["sentiment"] = df["review"].apply(simple_sentiment)
+
+# Count each Sentiment Type
+sentiment_counts = df["sentiment"].value_counts()
+
+# Plot Sentiment Distribution
+plt.figure(figsize=(6, 4))
+plt.bar(sentiment_counts.index, sentiment_counts.values)
+plt.title("Sentiment Distribution")
+plt.xlabel("Sentiment")
+plt.ylabel("Count")
+plt.tight_layout()
+plt.show()
+
+# Output the final table
+print(df)

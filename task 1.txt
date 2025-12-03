@@ -1,0 +1,29 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = {
+    "Restaurant": ["Aroma", "Spicy Hub", "Green Leaf", "Food Circle", "Taste Town", "Royal Biryani", "Pizza King", "Coffee Day"],
+    "City": ["Chennai", "Chennai", "Madurai", "Coimbatore", "Chennai", "Madurai", "Coimbatore", "Chennai"],
+    "Rating": [4.2, 3.8, 4.5, 4.1, 3.6, 4.3, 4.0, 3.9],
+    "Price_Range": ["Medium", "Low", "Medium", "High", "Low", "High", "Medium", "Low"],
+    "Online_Order": ["Yes", "Yes", "No", "Yes", "No", "Yes", "Yes", "Yes"]
+}
+
+df = pd.DataFrame(data)
+print(df)
+
+# Graph 1: Restaurants by City
+plt.figure()
+df['City'].value_counts().plot(kind='bar')
+plt.title('Restaurants by City')
+plt.xlabel('City')
+plt.ylabel('Number of Restaurants')
+plt.show()
+
+# Graph 2: Rating Distribution
+plt.figure()
+df['Rating'].plot(kind='hist', bins=5, edgecolor='black')
+plt.title('Rating Distribution')
+plt.xlabel('Rating')
+plt.ylabel('Frequency')
+plt.show()
